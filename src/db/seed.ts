@@ -5,6 +5,11 @@ import { contactMessages, experience, projects, skills } from "./schema";
 async function seed() {
   console.log("Seeding database…");
 
+  if (!db) {
+    console.error("DATABASE_URL is not set — cannot seed.");
+    process.exit(1);
+  }
+
   await db.delete(contactMessages);
   await db.delete(projects);
   await db.delete(skills);
