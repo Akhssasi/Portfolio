@@ -11,3 +11,4 @@
 secret-config.json
 
 node_modules/
+.next/
