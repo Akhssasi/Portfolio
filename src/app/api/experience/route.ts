@@ -1,6 +1,6 @@
-import { asc } from "drizzle-orm";
-import { db } from "@/db";
-import { experience } from "@/db/schema";
+import { db, isUsingMemoryStore } from "@/db";
+import { experience as experienceTable } from "@/db/schema";
+import { experienceStore, nextExperienceIdValue } from "@/db/static-data";
 import {
   badRequest,
   created,
@@ -16,10 +16,17 @@ export const dynamic = "force-dynamic";
 /** GET /api/experience — list timeline entries (public). */
 export async function GET() {
   try {
-    const rows = await db
+    if (isUsingMemoryStore) {
+      const rows = [...experienceStore].sort(
+        (a, b) => a.displayOrder - b.displayOrder || a.id - b.id,
+      );
+      return ok(rows);
+    }
+    const { asc } = await import("drizzle-orm");
+    const rows = await db!
       .select()
-      .from(experience)
-      .orderBy(asc(experience.displayOrder), asc(experience.id));
+      .from(experienceTable)
+      .orderBy(asc(experienceTable.displayOrder), asc(experienceTable.id));
     return ok(rows);
   } catch {
     return serverError("Failed to load experience");
@@ -39,8 +46,20 @@ export async function POST(req: Request) {
     return badRequest("Validation failed", zodFieldErrors(parsed.error));
   }
 
+  if (isUsingMemoryStore) {
+    const id = nextExperienceIdValue();
+    const row = {
+      id,
+      ...parsed.data,
+      translations: parsed.data.translations ?? {},
+      createdAt: new Date(),
+    } as (typeof experienceStore)[number];
+    experienceStore.push(row);
+    return created(row);
+  }
+
   try {
-    const [row] = await db.insert(experience).values(parsed.data).returning();
+    const [row] = await db!.insert(experienceTable).values(parsed.data).returning();
     return created(row);
   } catch {
     return serverError("Failed to create experience entry");

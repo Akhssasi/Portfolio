@@ -1,6 +1,6 @@
-import { asc } from "drizzle-orm";
-import { db } from "@/db";
-import { skills } from "@/db/schema";
+import { db, isUsingMemoryStore } from "@/db";
+import { skills as skillsTable } from "@/db/schema";
+import { skillsStore, nextSkillIdValue } from "@/db/static-data";
 import {
   badRequest,
   created,
@@ -16,10 +16,17 @@ export const dynamic = "force-dynamic";
 /** GET /api/skills — list all skills (public). */
 export async function GET() {
   try {
-    const rows = await db
+    if (isUsingMemoryStore) {
+      const rows = [...skillsStore].sort(
+        (a, b) => a.displayOrder - b.displayOrder || a.id - b.id,
+      );
+      return ok(rows);
+    }
+    const { asc } = await import("drizzle-orm");
+    const rows = await db!
       .select()
-      .from(skills)
-      .orderBy(asc(skills.displayOrder), asc(skills.id));
+      .from(skillsTable)
+      .orderBy(asc(skillsTable.displayOrder), asc(skillsTable.id));
     return ok(rows);
   } catch {
     return serverError("Failed to load skills");
@@ -39,8 +46,15 @@ export async function POST(req: Request) {
     return badRequest("Validation failed", zodFieldErrors(parsed.error));
   }
 
+  if (isUsingMemoryStore) {
+    const id = nextSkillIdValue();
+    const row = { id, ...parsed.data, createdAt: new Date() } as (typeof skillsStore)[number];
+    skillsStore.push(row);
+    return created(row);
+  }
+
   try {
-    const [row] = await db.insert(skills).values(parsed.data).returning();
+    const [row] = await db!.insert(skillsTable).values(parsed.data).returning();
     return created(row);
   } catch {
     return serverError("Failed to create skill");

@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
-import { db } from "@/db";
-import { experience } from "@/db/schema";
+import { db, isUsingMemoryStore } from "@/db";
+import { experience as experienceTable } from "@/db/schema";
+import { experienceStore } from "@/db/static-data";
 import {
   badRequest,
   notFound,
@@ -19,11 +19,18 @@ type Ctx = { params: Promise<{ id: string }> };
 export async function GET(_req: Request, ctx: Ctx) {
   const id = parseIdParam((await ctx.params).id);
   if (!id) return badRequest("Invalid experience id");
+
+  if (isUsingMemoryStore) {
+    const row = experienceStore.find((e) => e.id === id);
+    return row ? ok(row) : notFound("Experience entry not found");
+  }
+
   try {
-    const [row] = await db
+    const { eq } = await import("drizzle-orm");
+    const [row] = await db!
       .select()
-      .from(experience)
-      .where(eq(experience.id, id));
+      .from(experienceTable)
+      .where(eq(experienceTable.id, id));
     return row ? ok(row) : notFound("Experience entry not found");
   } catch {
     return serverError("Failed to load experience entry");
@@ -46,11 +53,20 @@ export async function PUT(req: Request, ctx: Ctx) {
     return badRequest("Validation failed", zodFieldErrors(parsed.error));
   }
 
+  if (isUsingMemoryStore) {
+    const idx = experienceStore.findIndex((e) => e.id === id);
+    if (idx === -1) return notFound("Experience entry not found");
+    const updated = { ...experienceStore[idx], ...parsed.data };
+    experienceStore[idx] = updated;
+    return ok(updated);
+  }
+
   try {
-    const [row] = await db
-      .update(experience)
+    const { eq } = await import("drizzle-orm");
+    const [row] = await db!
+      .update(experienceTable)
       .set(parsed.data)
-      .where(eq(experience.id, id))
+      .where(eq(experienceTable.id, id))
       .returning();
     return row ? ok(row) : notFound("Experience entry not found");
   } catch {
@@ -66,11 +82,19 @@ export async function DELETE(req: Request, ctx: Ctx) {
   const id = parseIdParam((await ctx.params).id);
   if (!id) return badRequest("Invalid experience id");
 
+  if (isUsingMemoryStore) {
+    const idx = experienceStore.findIndex((e) => e.id === id);
+    if (idx === -1) return notFound("Experience entry not found");
+    experienceStore.splice(idx, 1);
+    return ok({ deleted: id });
+  }
+
   try {
-    const [row] = await db
-      .delete(experience)
-      .where(eq(experience.id, id))
-      .returning({ id: experience.id });
+    const { eq } = await import("drizzle-orm");
+    const [row] = await db!
+      .delete(experienceTable)
+      .where(eq(experienceTable.id, id))
+      .returning({ id: experienceTable.id });
     return row ? ok({ deleted: row.id }) : notFound("Experience entry not found");
   } catch {
     return serverError("Failed to delete experience entry");

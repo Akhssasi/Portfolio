@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
-import { db } from "@/db";
-import { projects } from "@/db/schema";
+import { db, isUsingMemoryStore } from "@/db";
+import { projects as projectsTable } from "@/db/schema";
+import { projectsStore } from "@/db/static-data";
 import {
   badRequest,
   notFound,
@@ -20,8 +20,18 @@ type Ctx = { params: Promise<{ id: string }> };
 export async function GET(_req: Request, ctx: Ctx) {
   const id = parseIdParam((await ctx.params).id);
   if (!id) return badRequest("Invalid project id");
+
+  if (isUsingMemoryStore) {
+    const row = projectsStore.find((p) => p.id === id);
+    return row ? ok(row) : notFound("Project not found");
+  }
+
   try {
-    const [row] = await db.select().from(projects).where(eq(projects.id, id));
+    const { eq } = await import("drizzle-orm");
+    const [row] = await db!
+      .select()
+      .from(projectsTable)
+      .where(eq(projectsTable.id, id));
     return row ? ok(row) : notFound("Project not found");
   } catch {
     return serverError("Failed to load project");
@@ -44,11 +54,20 @@ export async function PUT(req: Request, ctx: Ctx) {
     return badRequest("Validation failed", zodFieldErrors(parsed.error));
   }
 
+  if (isUsingMemoryStore) {
+    const idx = projectsStore.findIndex((p) => p.id === id);
+    if (idx === -1) return notFound("Project not found");
+    const updated = { ...projectsStore[idx], ...parsed.data, updatedAt: new Date() };
+    projectsStore[idx] = updated;
+    return ok(updated);
+  }
+
   try {
-    const [row] = await db
-      .update(projects)
+    const { eq } = await import("drizzle-orm");
+    const [row] = await db!
+      .update(projectsTable)
       .set({ ...parsed.data, updatedAt: new Date() })
-      .where(eq(projects.id, id))
+      .where(eq(projectsTable.id, id))
       .returning();
     return row ? ok(row) : notFound("Project not found");
   } catch {
@@ -64,11 +83,19 @@ export async function DELETE(_req: Request, ctx: Ctx) {
   const id = parseIdParam((await ctx.params).id);
   if (!id) return badRequest("Invalid project id");
 
+  if (isUsingMemoryStore) {
+    const idx = projectsStore.findIndex((p) => p.id === id);
+    if (idx === -1) return notFound("Project not found");
+    projectsStore.splice(idx, 1);
+    return ok({ deleted: id });
+  }
+
   try {
-    const [row] = await db
-      .delete(projects)
-      .where(eq(projects.id, id))
-      .returning({ id: projects.id });
+    const { eq } = await import("drizzle-orm");
+    const [row] = await db!
+      .delete(projectsTable)
+      .where(eq(projectsTable.id, id))
+      .returning({ id: projectsTable.id });
     return row ? ok({ deleted: row.id }) : notFound("Project not found");
   } catch {
     return serverError("Failed to delete project");
