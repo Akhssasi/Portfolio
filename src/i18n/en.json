@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact",
+    "menu": "Open menu",
+    "close": "Close menu",
+    "resume": "Resume"
+  },
+  "hero": {
+    "badge": "Open to new opportunities",
+    "greeting": "hello, world — I'm",
+    "name": "DevPortfolioX",
+    "role": "Full Stack Engineer",
+    "headlineA": "Scalable",
+    "headlineB": "Spring Boot systems.",
+    "headlineC": "Modern",
+    "headlineD": "Angular interfaces.",
+    "subtitle": "I build secure, scalable, and user-friendly applications using Angular, TypeScript, Java, Spring Boot, and PostgreSQL.",
+    "ctaProjects": "View Projects",
+    "ctaResume": "Download Resume",
+    "ctaContact": "Contact Me",
+    "scroll": "scroll to explore",
+    "stats": [
+      { "value": "4+", "label": "Production-grade case studies" },
+      { "value": "20+", "label": "Technologies in the stack" },
+      { "value": "360°", "label": "Frontend to database ownership" }
+    ]
+  },
+  "about": {
+    "kicker": "// about-me",
+    "title": "Engineering the full stack, end to end",
+    "lead": "I bridge the gap between complex backend architectures and intuitive user interfaces. Whether I am designing a normalized PostgreSQL schema, building secure APIs with Spring Boot, or creating a type-safe frontend with Angular and TypeScript, I focus on performance, maintainability, and real-world business value.",
+    "body": "My approach is simple: clean architecture on the server, thoughtful state management on the client, and a database design that will still make sense two years from now. Every project I ship is documented, tested, and built to be handed over without a manual.",
+    "pillars": [
+      {
+        "title": "Frontend Architecture",
+        "desc": "Type-safe, component-driven SPAs with Angular, TypeScript, RxJS and reactive forms — plus React and Vue when the project calls for it."
+      },
+      {
+        "title": "Backend Engineering",
+        "desc": "Layered Spring Boot services — controller, service, repository, DTO — with clean separation of concerns and horizontal scalability in mind."
+      },
+      {
+        "title": "Database Design",
+        "desc": "Normalized PostgreSQL and MySQL schemas, deliberate indexing, query optimization and migrations that keep data consistent under load."
+      },
+      {
+        "title": "API & Security",
+        "desc": "Documented REST APIs with OpenAPI, JWT authentication, role-based authorization and validation at every boundary."
+      }
+    ],
+    "currentlyTitle": "Currently",
+    "currently": "Deepening distributed-systems design and shipping full-stack projects with enterprise-grade tooling."
+  },
+  "skills": {
+    "kicker": "// skills",
+    "title": "A stack that covers the whole request lifecycle",
+    "subtitle": "From the browser pixel to the database row — these are the tools I use to design, build, secure, and ship software.",
+    "proficiency": "proficiency",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Databases",
+      "tools": "Tools & DevOps"
+    }
+  },
+  "projects": {
+    "kicker": "// projects",
+    "title": "Featured case studies",
+    "subtitle": "Real full-stack systems — each one is an engineering story: a problem, an architecture, and a measurable result.",
+    "featured": "Featured",
+    "problem": "The problem",
+    "solution": "The solution",
+    "architecture": "Backend architecture",
+    "features": "Key features",
+    "achievement": "Key achievement",
+    "stack": "Tech stack",
+    "caseStudy": "Case study",
+    "liveDemo": "Live demo",
+    "source": "Source",
+    "close": "Close",
+    "overview": "Overview"
+  },
+  "experience": {
+    "kicker": "// experience",
+    "title": "Experience timeline",
+    "subtitle": "The milestones that shaped how I design, build, and ship software."
+  },
+  "contact": {
+    "kicker": "// contact",
+    "title": "Let's build something together",
+    "subtitle": "Have a project, a role, or just a technical question? My inbox is open — I reply within 24 hours.",
+    "emailLabel": "Email",
+    "emailValue": "hello@devportfoliox.com",
+    "locationLabel": "Location",
+    "locationValue": "Remote / Worldwide",
+    "availabilityLabel": "Availability",
+    "availabilityValue": "Full-time & freelance",
+    "formTitle": "Send a message",
+    "name": "Full name",
+    "email": "Email address",
+    "subject": "Subject",
+    "message": "Message",
+    "namePlaceholder": "John Doe",
+    "emailPlaceholder": "john@example.com",
+    "subjectPlaceholder": "Job opportunity",
+    "messagePlaceholder": "Tell me about your project, timeline, and goals…",
+    "submit": "Send message",
+    "sending": "Sending…",
+    "successTitle": "Message sent",
+    "success": "Thanks for reaching out. Your message was saved — I'll get back to you within 24 hours.",
+    "sendAnother": "Send another message",
+    "error": "Something went wrong. Please try again or email me directly.",
+    "responseTime": "Typical response time: under 24 hours",
+    "validation": {
+      "nameMin": "Name must be at least 2 characters",
+      "emailInvalid": "Please enter a valid email address",
+      "subjectMin": "Subject must be at least 3 characters",
+      "messageMin": "Message must be at least 10 characters"
+    }
+  },
+  "footer": {
+    "tagline": "Full Stack Engineer — building secure, scalable systems and clean interfaces.",
+    "navTitle": "Navigate",
+    "socialTitle": "Connect",
+    "builtWith": "Designed & engineered with Next.js, TypeScript, and PostgreSQL",
+    "rights": "All rights reserved.",
+    "backToTop": "Back to top",
+    "apiNote": "Content served from a live REST API"
+  },
+  "language": { "label": "Language" },
+  "theme": { "toLight": "Switch to light mode", "toDark": "Switch to dark mode" }
+}

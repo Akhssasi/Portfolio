@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "about": "À propos",
+    "skills": "Compétences",
+    "projects": "Projets",
+    "experience": "Expérience",
+    "contact": "Contact",
+    "menu": "Ouvrir le menu",
+    "close": "Fermer le menu",
+    "resume": "CV"
+  },
+  "hero": {
+    "badge": "Disponible pour de nouvelles opportunités",
+    "greeting": "bonjour, monde — je suis",
+    "name": "DevPortfolioX",
+    "role": "Ingénieur Full Stack",
+    "headlineA": "Des systèmes Spring Boot",
+    "headlineB": "évolutifs.",
+    "headlineC": "Des interfaces Angular",
+    "headlineD": "modernes.",
+    "subtitle": "Je conçois des applications sécurisées, évolutives et conviviales avec Angular, TypeScript, Java, Spring Boot et PostgreSQL.",
+    "ctaProjects": "Voir les projets",
+    "ctaResume": "Télécharger le CV",
+    "ctaContact": "Me contacter",
+    "scroll": "faites défiler",
+    "stats": [
+      { "value": "4+", "label": "Études de cas niveau production" },
+      { "value": "20+", "label": "Technologies maîtrisées" },
+      { "value": "360°", "label": "De l'interface à la base de données" }
+    ]
+  },
+  "about": {
+    "kicker": "// à-propos",
+    "title": "Ingénierie full stack, de bout en bout",
+    "lead": "Je fais le pont entre les architectures backend complexes et les interfaces utilisateur intuitives. Que je conçoive un schéma PostgreSQL normalisé, que je construise des API sécurisées avec Spring Boot ou que je développe un frontend fortement typé avec Angular et TypeScript, je me concentre sur la performance, la maintenabilité et la valeur métier réelle.",
+    "body": "Mon approche est simple : une architecture propre côté serveur, une gestion d'état réfléchie côté client et un schéma de base de données qui restera limpide dans deux ans. Chaque projet livré est documenté, testé et conçu pour être transmis sans mode d'emploi.",
+    "pillars": [
+      {
+        "title": "Architecture frontend",
+        "desc": "SPA typées et orientées composants avec Angular, TypeScript, RxJS et les formulaires réactifs — ainsi que React et Vue lorsque le projet l'exige."
+      },
+      {
+        "title": "Ingénierie backend",
+        "desc": "Services Spring Boot en couches — contrôleur, service, repository, DTO — avec une séparation claire des responsabilités et le passage à l'échelle en tête."
+      },
+      {
+        "title": "Conception de bases de données",
+        "desc": "Schémas PostgreSQL et MySQL normalisés, indexation réfléchie, optimisation des requêtes et migrations qui préservent la cohérence des données."
+      },
+      {
+        "title": "API & Sécurité",
+        "desc": "API REST documentées avec OpenAPI, authentification JWT, autorisation basée sur les rôles et validation à chaque frontière du système."
+      }
+    ],
+    "currentlyTitle": "En ce moment",
+    "currently": "J'approfondis la conception de systèmes distribués et je livre des projets full stack avec des outils de niveau entreprise."
+  },
+  "skills": {
+    "kicker": "// compétences",
+    "title": "Un stack qui couvre tout le cycle de vie d'une requête",
+    "subtitle": "Du pixel du navigateur à la ligne en base de données — les outils avec lesquels je conçois, développe, sécurise et livre des logiciels.",
+    "proficiency": "niveau de maîtrise",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Bases de données",
+      "tools": "Outils & DevOps"
+    }
+  },
+  "projects": {
+    "kicker": "// projets",
+    "title": "Études de cas à la une",
+    "subtitle": "De vrais systèmes full stack — chacun est une histoire d'ingénierie : un problème, une architecture et un résultat mesurable.",
+    "featured": "À la une",
+    "problem": "Le problème",
+    "solution": "La solution",
+    "architecture": "Architecture backend",
+    "features": "Fonctionnalités clés",
+    "achievement": "Réalisation clé",
+    "stack": "Stack technique",
+    "caseStudy": "Étude de cas",
+    "liveDemo": "Démo live",
+    "source": "Code",
+    "close": "Fermer",
+    "overview": "Vue d'ensemble"
+  },
+  "experience": {
+    "kicker": "// expérience",
+    "title": "Parcours professionnel",
+    "subtitle": "Les étapes qui ont façonné ma manière de concevoir, développer et livrer des logiciels."
+  },
+  "contact": {
+    "kicker": "// contact",
+    "title": "Construisons quelque chose ensemble",
+    "subtitle": "Un projet, un poste ou une question technique ? Ma boîte mail est ouverte — je réponds sous 24 heures.",
+    "emailLabel": "E-mail",
+    "emailValue": "hello@devportfoliox.com",
+    "locationLabel": "Localisation",
+    "locationValue": "À distance / International",
+    "availabilityLabel": "Disponibilité",
+    "availabilityValue": "CDI & freelance",
+    "formTitle": "Envoyer un message",
+    "name": "Nom complet",
+    "email": "Adresse e-mail",
+    "subject": "Sujet",
+    "message": "Message",
+    "namePlaceholder": "Jean Dupont",
+    "emailPlaceholder": "jean@example.com",
+    "subjectPlaceholder": "Opportunité professionnelle",
+    "messagePlaceholder": "Parlez-moi de votre projet, vos délais et vos objectifs…",
+    "submit": "Envoyer le message",
+    "sending": "Envoi en cours…",
+    "successTitle": "Message envoyé",
+    "success": "Merci pour votre message. Il a bien été enregistré — je vous répondrai sous 24 heures.",
+    "sendAnother": "Envoyer un autre message",
+    "error": "Une erreur est survenue. Réessayez ou contactez-moi directement par e-mail.",
+    "responseTime": "Temps de réponse habituel : moins de 24 h",
+    "validation": {
+      "nameMin": "Le nom doit contenir au moins 2 caractères",
+      "emailInvalid": "Veuillez saisir une adresse e-mail valide",
+      "subjectMin": "Le sujet doit contenir au moins 3 caractères",
+      "messageMin": "Le message doit contenir au moins 10 caractères"
+    }
+  },
+  "footer": {
+    "tagline": "Ingénieur Full Stack — je conçois des systèmes sécurisés et évolutifs, et des interfaces soignées.",
+    "navTitle": "Naviguer",
+    "socialTitle": "Réseaux",
+    "builtWith": "Conçu et développé avec Next.js, TypeScript et PostgreSQL",
+    "rights": "Tous droits réservés.",
+    "backToTop": "Haut de page",
+    "apiNote": "Contenu servi par une API REST en production"
+  },
+  "language": { "label": "Langue" },
+  "theme": { "toLight": "Passer en mode clair", "toDark": "Passer en mode sombre" }
+}

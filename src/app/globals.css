@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Space Grotesk", "Inter", "Noto Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", "Noto Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 7s ease-in-out infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 0.9; }
+  }
+}
+
+/* Locale-aware font overrides (Space Grotesk has no Cyrillic/Arabic) */
+html[lang="ru"] {
+  --font-display: "Inter", "Noto Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+}
+html[lang="ar"] {
+  --font-display: "Noto Sans Arabic", "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Noto Sans Arabic", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #f4f6fb;
+  color: #0f172a;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.dark body {
+  background-color: #060a13;
+  color: #e2e8f0;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.28);
+  color: inherit;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.35);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.22);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 8px;
+}
+
+/* Decorative helpers */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(100, 116, 139, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(100, 116, 139, 0.12) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.dark .bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.055) 1px, transparent 1px);
+}
+
+.grid-fade {
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 25%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 25%, transparent 78%);
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
